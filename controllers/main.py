@@ -3,7 +3,6 @@ import requests
 import numpy as np
 from PIL import Image
 from tensorflow import keras
-import joblib
 from io import BytesIO
 
 def predict(image_url):
@@ -35,7 +34,7 @@ def process(input_image):
 def crop_predict(processed_image):
 
     # Load the trained model
-    model = joblib.load('controllers/models/corn_model.pkl')
+    model = keras.models.load_model('controllers/models/corn_model.h5')
     # Make predictions
     predictions = model.predict(processed_image)
     # Process the predictions (e.g., get class labels)
@@ -49,25 +48,25 @@ def disease_predict(processed_image, crop):
 
     if crop == "Potato":
         # Load the trained model
-        model = joblib.load('controllers/models/potato_model.pkl')
+        model = keras.models.load_model('controllers/models/potato_model.h5')
         # Process the predictions (e.g., get class labels)
         class_labels = ["Potato__Early_Blight", "Potato_Healthy", "Potato__Late_Blight"] 
     
     elif crop == "Corn":
         # Load the trained model
-        model = joblib.load('controllers/models/corn_model.pkl')
+        model = keras.models.load_model('controllers/models/corn_model.h5')
         # Process the predictions (e.g., get class labels)
         class_labels = ["Corn__Common_Rust", "Corn_Gray_Leaf_Spot", "Corn_Healthy", "Corn__Northern_Leaf_Blight"] 
 
     elif crop == "Rice":
         # Load the trained model
-        model = joblib.load('controllers/models/rice_model.pkl')
+        model = keras.models.load_model('controllers/models/rice_model.h5')
         # Process the predictions (e.g., get class labels)
         class_labels = ["Rice__Brown_Spot", "Rice_Healthy", "Rice_Leaf_Blast", "Rice__Neck_Blast"] 
 
     elif crop == "Wheat":
         # Load the trained model
-        model = joblib.load('controllers/models/wheat_model.pkl')
+        model = keras.models.load_model('controllers/models/wheat_model.h5')
         # Process the predictions (e.g., get class labels)
         class_labels = ["Wheat__Brown_Rust", "Wheat_Healthy", "Wheat__Yellow_Rust"]
 
@@ -75,17 +74,14 @@ def disease_predict(processed_image, crop):
     predictions = model.predict(processed_image)
     predicted_class = np.argmax(predictions, axis=1)
     predicted_label = class_labels[predicted_class[0]]
-    return predicted_label
+    return [predicted_label,model,class_labels, crop]
 
 
 if __name__ == "__main__":
     if len(sys.argv)>1:
-        try:
-            print("Call predict function with image-url as parameter")
-            prediction = list(predict(sys.argv[1]))
-            print(prediction[0])
-            print(prediction[1])
-        except Exception as e:
-            print(str(e))
+        print("Call predict function with image-url as parameter")
+        prediction = list(predict(sys.argv[1]))
+        print(prediction[0])
+        print(prediction[1])
     else:
         print("Please Give Input!!!")

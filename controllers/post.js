@@ -52,15 +52,15 @@ const newPost = async (req, res) => {
       // solution:[diseaseSolutionPair[disease[disease.length-1]][0]]
       solution:['test']
     }]
-    const post = new Post({
-      img,
-      description,
-      createdAt: Date.now(),
-      creator: user,
-      analysis
-    });
-    await post.save();
-    res.send({ post,disease });
+    // const post = new Post({
+    //   img,
+    //   description,
+    //   createdAt: Date.now(),
+    //   creator: user,
+    //   analysis
+    // });
+    // await post.save();
+    res.send({ analysis });
   } catch (e) {
     res.send({ "Error": e.message });
   }
@@ -73,15 +73,15 @@ const newPostTemp = async (req, res) => {
     const analysis = [{
       disease,solution:[]
     }]
-    const post = new Post({
-      img,
-      description,
-      createdAt: Date.now(),
-      creator: user,
-      analysis
-    });
-    await post.save();
-    res.send({ post });
+    // const post = new Post({
+    //   img,
+    //   description,
+    //   createdAt: Date.now(),
+    //   creator: user,
+    //   analysis
+    // });
+    // await post.save();
+    res.send({ analysis });
   } catch (e) {
     res.send({ "Error": e.message });
   }
