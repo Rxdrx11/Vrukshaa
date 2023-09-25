@@ -2,7 +2,7 @@ import sys
 import requests
 import numpy as np
 from PIL import Image
-# from tensorflow import keras
+from tensorflow import keras
 import joblib
 from io import BytesIO
 
