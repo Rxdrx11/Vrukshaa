@@ -1,0 +1,5 @@
+joblib
+requests
+numpy
+pillow
+tensorflow 

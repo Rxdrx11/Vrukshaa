@@ -1,0 +1,5 @@
+controllers/models/corn_model.pkl filter=lfs diff=lfs merge=lfs -text
+controllers/models/crop_model.pkl filter=lfs diff=lfs merge=lfs -text
+controllers/models/potato_model.pkl filter=lfs diff=lfs merge=lfs -text
+controllers/models/wheat_model.pkl filter=lfs diff=lfs merge=lfs -text
+controllers/models/rice_model.pkl filter=lfs diff=lfs merge=lfs -text
